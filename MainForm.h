@@ -51,12 +51,12 @@ namespace DatabaseFormProject {
 	private: System::Windows::Forms::TextBox^ textFName;
 	private: System::Windows::Forms::TextBox^ textLName;
 
-	private: System::Windows::Forms::TextBox^ textDpt;
-	private: System::Windows::Forms::TextBox^ textSpec;
-	private: System::Windows::Forms::TextBox^ textLang;
 
-	private: System::Windows::Forms::TextBox^ textVacSt;
-	private: System::Windows::Forms::TextBox^ textVacEd;
+
+
+
+
+
 
 	private: System::Windows::Forms::TextBox^ textEmail;
 	private: System::Windows::Forms::TextBox^ textPhone;
@@ -64,9 +64,25 @@ namespace DatabaseFormProject {
 
 	private: System::Windows::Forms::Button^ subButton;
 	private: System::Windows::Forms::Button^ resetButton;
-	private: System::Windows::Forms::Button^ btnsearch;
+	private: System::Windows::Forms::Button^ btnLNsearch;
+
 	private: System::Windows::Forms::ListBox^ lstOutput;
-	
+	private: System::Windows::Forms::ComboBox^ specBox;
+	private: System::Windows::Forms::ComboBox^ deptBox;
+	private: System::Windows::Forms::ComboBox^ langBox;
+	private: System::Windows::Forms::DateTimePicker^ vacStart;
+	private: System::Windows::Forms::DateTimePicker^ vacEnd;
+	private: System::Windows::Forms::TextBox^ textSrchLName;
+	private: System::Windows::Forms::TextBox^ textSrchID;
+
+	private: System::Windows::Forms::Button^ btnsrchID;
+	private: System::Windows::Forms::Button^ Reload;
+
+
+
+
+
+
 
 
 
@@ -98,15 +114,10 @@ namespace DatabaseFormProject {
 			this->textPhone = (gcnew System::Windows::Forms::TextBox());
 			this->subButton = (gcnew System::Windows::Forms::Button());
 			this->resetButton = (gcnew System::Windows::Forms::Button());
-			this->btnsearch = (gcnew System::Windows::Forms::Button());
+			this->btnLNsearch = (gcnew System::Windows::Forms::Button());
 			this->lstOutput = (gcnew System::Windows::Forms::ListBox());
 			this->textLName = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textDpt = (gcnew System::Windows::Forms::TextBox());
-			this->textSpec = (gcnew System::Windows::Forms::TextBox());
-			this->textLang = (gcnew System::Windows::Forms::TextBox());
-			this->textVacSt = (gcnew System::Windows::Forms::TextBox());
-			this->textVacEd = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -115,6 +126,15 @@ namespace DatabaseFormProject {
 			this->textID = (gcnew System::Windows::Forms::TextBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->specBox = (gcnew System::Windows::Forms::ComboBox());
+			this->deptBox = (gcnew System::Windows::Forms::ComboBox());
+			this->langBox = (gcnew System::Windows::Forms::ComboBox());
+			this->vacStart = (gcnew System::Windows::Forms::DateTimePicker());
+			this->vacEnd = (gcnew System::Windows::Forms::DateTimePicker());
+			this->textSrchLName = (gcnew System::Windows::Forms::TextBox());
+			this->textSrchID = (gcnew System::Windows::Forms::TextBox());
+			this->btnsrchID = (gcnew System::Windows::Forms::Button());
+			this->Reload = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -171,6 +191,7 @@ namespace DatabaseFormProject {
 			this->textPhone->Name = L"textPhone";
 			this->textPhone->Size = System::Drawing::Size(184, 20);
 			this->textPhone->TabIndex = 5;
+			this->textPhone->TextChanged += gcnew System::EventHandler(this, &MainForm::textPhone_TextChanged);
 			// 
 			// subButton
 			// 
@@ -192,15 +213,15 @@ namespace DatabaseFormProject {
 			this->resetButton->UseVisualStyleBackColor = true;
 			this->resetButton->Click += gcnew System::EventHandler(this, &MainForm::resetButton_Click);
 			// 
-			// btnsearch
+			// btnLNsearch
 			// 
-			this->btnsearch->Location = System::Drawing::Point(255, 233);
-			this->btnsearch->Name = L"btnsearch";
-			this->btnsearch->Size = System::Drawing::Size(81, 35);
-			this->btnsearch->TabIndex = 8;
-			this->btnsearch->Text = L"Search";
-			this->btnsearch->UseVisualStyleBackColor = true;
-			this->btnsearch->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
+			this->btnLNsearch->Location = System::Drawing::Point(598, 213);
+			this->btnLNsearch->Name = L"btnLNsearch";
+			this->btnLNsearch->Size = System::Drawing::Size(115, 20);
+			this->btnLNsearch->TabIndex = 8;
+			this->btnLNsearch->Text = L"Search Last Name";
+			this->btnLNsearch->UseVisualStyleBackColor = true;
+			this->btnLNsearch->Click += gcnew System::EventHandler(this, &MainForm::btnLNsearch_Click);
 			// 
 			// lstOutput
 			// 
@@ -229,41 +250,6 @@ namespace DatabaseFormProject {
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"Last Name:";
 			this->label4->Click += gcnew System::EventHandler(this, &MainForm::label4_Click);
-			// 
-			// textDpt
-			// 
-			this->textDpt->Location = System::Drawing::Point(433, 154);
-			this->textDpt->Name = L"textDpt";
-			this->textDpt->Size = System::Drawing::Size(160, 20);
-			this->textDpt->TabIndex = 12;
-			// 
-			// textSpec
-			// 
-			this->textSpec->Location = System::Drawing::Point(433, 180);
-			this->textSpec->Name = L"textSpec";
-			this->textSpec->Size = System::Drawing::Size(160, 20);
-			this->textSpec->TabIndex = 13;
-			// 
-			// textLang
-			// 
-			this->textLang->Location = System::Drawing::Point(701, 129);
-			this->textLang->Name = L"textLang";
-			this->textLang->Size = System::Drawing::Size(147, 20);
-			this->textLang->TabIndex = 14;
-			// 
-			// textVacSt
-			// 
-			this->textVacSt->Location = System::Drawing::Point(701, 153);
-			this->textVacSt->Name = L"textVacSt";
-			this->textVacSt->Size = System::Drawing::Size(147, 20);
-			this->textVacSt->TabIndex = 15;
-			// 
-			// textVacEd
-			// 
-			this->textVacEd->Location = System::Drawing::Point(701, 178);
-			this->textVacEd->Name = L"textVacEd";
-			this->textVacEd->Size = System::Drawing::Size(147, 20);
-			this->textVacEd->TabIndex = 16;
 			// 
 			// label5
 			// 
@@ -322,7 +308,7 @@ namespace DatabaseFormProject {
 			// 
 			// textID
 			// 
-			this->textID->Location = System::Drawing::Point(460, 82);
+			this->textID->Location = System::Drawing::Point(155, 103);
 			this->textID->Name = L"textID";
 			this->textID->Size = System::Drawing::Size(100, 20);
 			this->textID->TabIndex = 22;
@@ -332,7 +318,7 @@ namespace DatabaseFormProject {
 			this->label10->AutoSize = true;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->label10->Location = System::Drawing::Point(433, 82);
+			this->label10->Location = System::Drawing::Point(128, 103);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(24, 13);
 			this->label10->TabIndex = 23;
@@ -349,11 +335,110 @@ namespace DatabaseFormProject {
 			this->label11->TabIndex = 24;
 			this->label11->Text = L"-Doctor Database-";
 			// 
+			// specBox
+			// 
+			this->specBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->specBox->FormattingEnabled = true;
+			this->specBox->Location = System::Drawing::Point(433, 176);
+			this->specBox->Name = L"specBox";
+			this->specBox->Size = System::Drawing::Size(160, 21);
+			this->specBox->TabIndex = 25;
+			this->specBox->Text = L"Select a Specialty";
+			this->specBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBox1_SelectedIndexChanged);
+			// 
+			// deptBox
+			// 
+			this->deptBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->deptBox->FormattingEnabled = true;
+			this->deptBox->Location = System::Drawing::Point(433, 151);
+			this->deptBox->Name = L"deptBox";
+			this->deptBox->Size = System::Drawing::Size(160, 21);
+			this->deptBox->TabIndex = 26;
+			this->deptBox->Tag = L"";
+			this->deptBox->Text = L"Select a Dept.";
+			this->deptBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::deptBox_SelectedIndexChanged);
+			// 
+			// langBox
+			// 
+			this->langBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->langBox->FormattingEnabled = true;
+			this->langBox->Location = System::Drawing::Point(701, 126);
+			this->langBox->Name = L"langBox";
+			this->langBox->Size = System::Drawing::Size(147, 21);
+			this->langBox->TabIndex = 27;
+			this->langBox->Text = L"Select a Language";
+			// 
+			// vacStart
+			// 
+			this->vacStart->Checked = false;
+			this->vacStart->Location = System::Drawing::Point(701, 153);
+			this->vacStart->Name = L"vacStart";
+			this->vacStart->ShowCheckBox = true;
+			this->vacStart->Size = System::Drawing::Size(200, 20);
+			this->vacStart->TabIndex = 28;
+			this->vacStart->ValueChanged += gcnew System::EventHandler(this, &MainForm::vacStart_ValueChanged);
+			// 
+			// vacEnd
+			// 
+			this->vacEnd->Checked = false;
+			this->vacEnd->Location = System::Drawing::Point(701, 176);
+			this->vacEnd->Name = L"vacEnd";
+			this->vacEnd->ShowCheckBox = true;
+			this->vacEnd->Size = System::Drawing::Size(200, 20);
+			this->vacEnd->TabIndex = 29;
+			// 
+			// textSrchLName
+			// 
+			this->textSrchLName->Location = System::Drawing::Point(720, 213);
+			this->textSrchLName->Name = L"textSrchLName";
+			this->textSrchLName->Size = System::Drawing::Size(100, 20);
+			this->textSrchLName->TabIndex = 30;
+			// 
+			// textSrchID
+			// 
+			this->textSrchID->Location = System::Drawing::Point(720, 240);
+			this->textSrchID->Name = L"textSrchID";
+			this->textSrchID->Size = System::Drawing::Size(100, 20);
+			this->textSrchID->TabIndex = 31;
+			this->textSrchID->TextChanged += gcnew System::EventHandler(this, &MainForm::textSrchID_TextChanged);
+			// 
+			// btnsrchID
+			// 
+			this->btnsrchID->Location = System::Drawing::Point(598, 240);
+			this->btnsrchID->Name = L"btnsrchID";
+			this->btnsrchID->Size = System::Drawing::Size(115, 23);
+			this->btnsrchID->TabIndex = 32;
+			this->btnsrchID->Text = L"Search ID";
+			this->btnsrchID->UseVisualStyleBackColor = true;
+			this->btnsrchID->Click += gcnew System::EventHandler(this, &MainForm::btnsrchID_Click);
+			// 
+			// Reload
+			// 
+			this->Reload->Location = System::Drawing::Point(245, 233);
+			this->Reload->Name = L"Reload";
+			this->Reload->Size = System::Drawing::Size(93, 35);
+			this->Reload->TabIndex = 33;
+			this->Reload->Text = L"Reload";
+			this->Reload->UseVisualStyleBackColor = true;
+			this->Reload->Click += gcnew System::EventHandler(this, &MainForm::button1_Click_1);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1025, 590);
+			this->Controls->Add(this->Reload);
+			this->Controls->Add(this->btnsrchID);
+			this->Controls->Add(this->textSrchID);
+			this->Controls->Add(this->textSrchLName);
+			this->Controls->Add(this->vacEnd);
+			this->Controls->Add(this->vacStart);
+			this->Controls->Add(this->langBox);
+			this->Controls->Add(this->deptBox);
+			this->Controls->Add(this->specBox);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->textID);
@@ -362,15 +447,10 @@ namespace DatabaseFormProject {
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
-			this->Controls->Add(this->textVacEd);
-			this->Controls->Add(this->textVacSt);
-			this->Controls->Add(this->textLang);
-			this->Controls->Add(this->textSpec);
-			this->Controls->Add(this->textDpt);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->textLName);
 			this->Controls->Add(this->lstOutput);
-			this->Controls->Add(this->btnsearch);
+			this->Controls->Add(this->btnLNsearch);
 			this->Controls->Add(this->resetButton);
 			this->Controls->Add(this->subButton);
 			this->Controls->Add(this->textPhone);
@@ -387,16 +467,28 @@ namespace DatabaseFormProject {
 
 		}
 #pragma endregion
+
+		String^ stdDetails = "{0,-10}{1,-13}{2,-13}{3,-15}{4,-15}{5,-15}{6,-17}{7,-17}{8,-17}{9,-19}";
+
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void resetButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		//this->textName->Text = "";
+		this->textID->Text = "";
+		this->textFName->Text = "";
+		this->textLName->Text = "";
 		this->textEmail->Text = "";
 		this->textPhone->Text = "";
+		this->vacStart->Text = "";
+		this->vacEnd->Text = "";
+		this->textEmail->Text = "";
+		this->deptBox->Text = "";
+		this->specBox->Text = "";
+		this->langBox->Text = "";
+
 	}
 private: System::Void subButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	/*if (this->textLName->Text->Trim() == "")
+	if (this->textLName->Text->Trim() == "")
 	{
 		MessageBox::Show("Please enter last name", "Validation", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
@@ -410,73 +502,105 @@ private: System::Void subButton_Click(System::Object^ sender, System::EventArgs^
 	{
 		MessageBox::Show("Please enter phone number", "Validation", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
-
+	
 	else
 	{
 		try {
-			String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;Trust Server Certificate=True";
+			String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
 			SqlConnection con(connectionstring);
 			con.Open();
-			String^ sqlquery = "Insert into UserRecord values('" + this->textID->Text +"','" + this->textFName->Text +"','"+this->textLName->Text +"','"+this->textPhone->Text +"','" + this->textVacSt->Text + "','" + '"+this->textVacEd->Text +"',
-			+this->textEmail->Text + "''"+this->textDpt->Text +"','"+this->textSpec->Text +"', '"+this->textLang->Text +"')";
+			String^ sqlquery = "Insert into DoctorDatabase values('" + this->textID->Text +"','" + this->textFName->Text +"','"+this->textLName->Text +"','"+this->textPhone->Text +"','" + this->vacStart->Text + "', '" + this->vacEnd->Text + "' , '" + this->textEmail->Text + "', '" + this->deptBox->Text + "', '" + this->specBox->Text + "', '" + this->langBox->Text + "')";
+				
 
 			SqlCommand cmd(sqlquery, % con);
 			cmd.ExecuteNonQuery();
 			con.Close();
 			MessageBox::Show("Data submitted successfully", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			this->textName->Text = "";
-			this->textEmail->Text = "";
-			this->textPhone->Text = "";
-
+			
+			
 		}
 		catch (Exception^ ex) 
 		{
 			throw ex;
 		}
+
 		
-	}*/
 
-}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	/*try
-	{
-		String^ connectionstring = "Data Source=LOWORBITDRIFTER\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;Trust Server Certificate=True";
-		SqlConnection con(connectionstring);
-		String^ sqlquery = "Select * from UserRecord where FullName like '%"+this-> textName->Text+"%'";
-		SqlCommand cmd(sqlquery, % con);
-		con.Open();
-		SqlDataReader^ dr = cmd.ExecuteReader();
-
-		if (dr->Read())
+		try
 		{
-			String^ result = "Full Name : " + dr["FullName"]->ToString() + "\nEmail : " + dr["Email"]->ToString() + ",\nPhone : " + dr["Phone"]->ToString();
-			dr->Close();
-			MessageBox::Show(result, "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+			SqlConnection con(connectionstring);
+			String^ sqlquery = "Select * from DoctorDatabase";
+			SqlCommand cmd(sqlquery, % con);
+			con.Open();
+			SqlDataReader^ dr = cmd.ExecuteReader();
+
+			if (dr->Read())
+			{
+				lstOutput->Items->Clear();
+				lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start", "Vacation End", "Email", "Department", "Specialty", "Language"));
+
+				lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+
+				while (dr->Read()) {
+
+					lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+				}
+				dr->Close();
+
+			}
+			else
+			{
+				dr->Close();
+				MessageBox::Show("Database is empty", "No data found", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+			con.Close();
 		}
-		else 
+		catch (Exception^ ex)
 		{
-			dr->Close();
-			MessageBox::Show("No data found", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+			throw ex;
 		}
-		con.Close();
+		
 	}
-	catch (Exception^ ex) 
-	{
 
-		throw ex;
-	}*/
-	
+
+
 }
-	   String^ stdDetails = "{0,-10}{1,-13}{2,-13}{3,-15}{4,-15}{5,-15}{6,-17}{7,-17}{8,-17}{9,-19}";
+
+	 //  String^ stdDetails = "{0,-10}{1,-13}{2,-13}{3,-15}{4,-15}{5,-15}{6,-17}{7,-17}{8,-17}{9,-19}";
 private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
-	lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start","Vacation End", "Email","Department", "Specialty", "Languages"));
+	String^ ID = textID->Text;
+	String^ First = textFName->Text;
+	String^ Last = textLName->Text;
+	String^ Phone = textPhone->Text;
+	String^ VacST = vacStart->Text;
+	String^ VacED = vacEnd->Text;
+	String^ Email = textEmail->Text;
+	String^ Dept = deptBox->Text;
+	String^ Spec = specBox->Text;
+	String^ Lang = langBox->Text;
+
+	lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start","Vacation End", "Email","Department", "Specialty", "Language"));
+
+	deptBox->Items->Add("Oncology");
+	deptBox->Items->Add("Surgery");
+	deptBox->Items->Add("Rehab");
+
+	specBox->Items->Add("otolaryngologist");
+	specBox->Items->Add("Podiatrist");
+	specBox->Items->Add("Neurologist");
+
+	langBox->Items->Add("English");
+	langBox->Items->Add("Spanish");
+	langBox->Items->Add("French");
+	langBox->Items->Add("Italian");
 
 
-	/*try
+	try
 	{
-		String^ connectionstring = "Data Source=LOWORBITDRIFTER\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;Trust Server Certificate=True";
+		String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
 		SqlConnection con(connectionstring);
 		String^ sqlquery = "Select * from DoctorDatabase";
 		SqlCommand cmd(sqlquery, % con);
@@ -485,13 +609,73 @@ private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e
 
 		if (dr->Read())
 		{
+			lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
 
-		
-			String^ result = dr["ID"]->ToString() + dr["First"]->ToString() + dr["Last"]->ToString() +  dr["Phone"]->ToString() + dr["VacSt"]->ToString() + dr["Email"]->ToString();
+				while (dr->Read()) {
 
-			lstOutput->Items->Add(String::Format(stdDetails,""));
+					lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+				}
 			dr->Close();
 			
+		}
+		else
+		{
+			dr->Close();
+			MessageBox::Show("Database is empty", "No data found", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+		con.Close();
+	}
+	catch (Exception^ ex)
+	{
+
+		throw ex;
+	}
+
+}
+
+	  
+private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+
+	
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textPhone_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void deptBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+
+
+
+}
+private: System::Void vacStart_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnsrchID_Click(System::Object^ sender, System::EventArgs^ e) {
+	 
+	try
+	{
+		String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+		SqlConnection con(connectionstring);
+		String^ sqlIDQuery = "Select * from DoctorDatabase where Id like '%"+this-> textSrchID->Text+"%'";
+		SqlCommand cmd(sqlIDQuery, % con);
+		con.Open();
+		SqlDataReader^ dr = cmd.ExecuteReader();
+
+		if (dr->Read())
+		{
+			lstOutput->Items->Clear();
+			lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start", "Vacation End", "Email", "Department", "Specialty", "Language"));
+
+			lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+
+			while (dr->Read()) {
+
+				lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+			}
+			dr->Close();
+			this->textSrchID->Text = "";
+
 		}
 		else
 		{
@@ -504,16 +688,85 @@ private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e
 	{
 
 		throw ex;
-	}*/
-
+	}
 }
+private: System::Void btnLNsearch_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	  
-private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	try
+	{
+		String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+		SqlConnection con(connectionstring);
+		String^ sqlLNamequery = "Select * from DoctorDatabase where Last like '%"+this-> textSrchLName->Text+"%'";
+		SqlCommand cmd(sqlLNamequery, % con);
+		con.Open();
+		SqlDataReader^ dr = cmd.ExecuteReader();
 
-	
+		if (dr->Read())
+		{
+			lstOutput->Items->Clear();
+			lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start", "Vacation End", "Email", "Department", "Specialty", "Language"));
+
+			lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+
+			while (dr->Read()) {
+
+				lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+			}
+			dr->Close();
+			this->textSrchLName->Text = "";
+		}
+		else
+		{
+			dr->Close();
+			MessageBox::Show("No data found", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+		con.Close();
+	}
+	catch (Exception^ ex)
+	{
+
+		throw ex;
+	}
 }
-private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void textSrchID_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	try
+	{
+		String^ connectionstring = "Data Source=LOWORBITDRIFTER\\MSSQLSERVER01;Initial Catalog=DoctorDatabase;Integrated Security=True;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+		SqlConnection con(connectionstring);
+		String^ sqlquery = "Select * from DoctorDatabase";
+		SqlCommand cmd(sqlquery, % con);
+		con.Open();
+		SqlDataReader^ dr = cmd.ExecuteReader();
+
+		if (dr->Read())
+		{
+			lstOutput->Items->Clear();
+			lstOutput->Items->Add(String::Format(stdDetails, "ID", "First", "Last", "Phone", "Vacation Start", "Vacation End", "Email", "Department", "Specialty", "Language"));
+
+			lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+
+			while (dr->Read()) {
+
+				lstOutput->Items->Add(String::Format(stdDetails, dr["ID"]->ToString(), dr["First"]->ToString(), dr["Last"]->ToString(), dr["Phone"]->ToString(), dr["VacationSt"]->ToString(), dr["VacationEd"]->ToString(), dr["Email"]->ToString(), dr["Department"]->ToString(), dr["Specialty"]->ToString(), dr["Language"]->ToString()));
+			}
+			dr->Close();
+
+		}
+		else
+		{
+			dr->Close();
+			MessageBox::Show("Database is empty", "No data found", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+		con.Close();
+	}
+	catch (Exception^ ex)
+	{
+
+		throw ex;
+	}
+
 }
 };
 }
